@@ -2,6 +2,10 @@ import './app.scss';
 import {useEffect, useState} from 'react';
 import data from './stays.json';
 
+// Components
+import HeaderComponent from './components/HeaderComponent/headerComponent';
+import CardComponent from './components/CardComponent/CardComponent';
+
 function App() {
 
   const [hotelList, setHotels] = useState([]);
@@ -10,12 +14,17 @@ function App() {
   useEffect(() => {
     setHotels(data);
   }, []);
+  
   return (
     <div>
-      windbnb app
+
+      <HeaderComponent></HeaderComponent>
 
       {hotelList.map((hotel) => (
-        <p>{hotel.title}</p>
+        <CardComponent 
+          key={hotel.title}
+          hotel={hotel}>
+        </CardComponent>
       ))}
     </div>
   );
