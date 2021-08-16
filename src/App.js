@@ -1,5 +1,5 @@
 import './app.scss';
-import {useEffect, useState} from 'react';
+import { Fragment, useEffect, useState} from 'react';
 import data from './stays.json';
 
 // Components
@@ -16,17 +16,21 @@ function App() {
   }, []);
   
   return (
-    <div>
+    <Fragment>
 
       <HeaderComponent></HeaderComponent>
 
-      {hotelList.map((hotel) => (
-        <CardComponent 
-          key={hotel.title}
-          hotel={hotel}>
-        </CardComponent>
-      ))}
-    </div>
+      <div className="content">
+        <span class="material-icons">face</span>
+
+        {hotelList.map((hotel) => (
+          <CardComponent 
+            key={hotel.title}
+            hotel={hotel}>
+          </CardComponent>
+        ))}
+      </div>
+    </Fragment>
   );
 }
 
