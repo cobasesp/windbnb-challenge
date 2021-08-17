@@ -8,12 +8,52 @@ import CardComponent from './components/CardComponent/CardComponent';
 
 function App() {
 
+  const filterObj = {
+    location: '',
+    guests: 0
+  }
+
   const [hotelList, setHotels] = useState([]);
+  const [hotelFiltered, setFilteredHotels] = useState([]);
+  const [firstLoad, setFirstLoad] = useState(true);
+  const [filters, setFilters] = useState(filterObj);
+  const [viewInfo, setViewInfo] = useState({text:'',num:0})
 
   // Load data
   useEffect(() => {
     setHotels(data);
+    setFilteredHotels(data);
+    setViewInfo({
+      text: 'All stays',
+      number: data.length
+    })
   }, []);
+
+  // When filtered change to true or false filter the hotel list or reset the list
+  useEffect(() => {
+    if(!firstLoad){
+      let newArray = getHotelsByFilters(filters);
+      setFilteredHotels(newArray);
+      setViewInfo({
+        text: `${filters.location} stays`,
+        num: newArray.length
+      })
+    }
+  }, [filters]);
+
+  setTimeout(() => {
+    setFirstLoad(false);
+  }, 200);
+
+  const getHotelsByFilters = (filters) => {
+    if(filters.location == "" || filters.guests == 0){
+      return hotelList;
+    }else{
+      return hotelList.filter(hotel => { 
+        return (hotel.city + ', ' + hotel.country) == filters.location && hotel.maxGuests > filters.guests;  
+      })
+    }
+  }
   
   return (
     <Fragment>
@@ -21,9 +61,10 @@ function App() {
       <HeaderComponent></HeaderComponent>
 
       <div className="content">
-        <span class="material-icons">face</span>
+        <h1>{viewInfo.text}</h1>
+        <span className="pull-right">{viewInfo.num}</span>
 
-        {hotelList.map((hotel) => (
+        {hotelFiltered.map((hotel) => (
           <CardComponent 
             key={hotel.title}
             hotel={hotel}>
