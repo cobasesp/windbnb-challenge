@@ -10,6 +10,10 @@ body {
         font-family: Arial, Helvetica, sans-serif;
     }
 
+    .pull-right{
+        float: right;
+    }
+
     .content{
         width: 1200px;
         margin: 0 auto;
@@ -23,5 +27,24 @@ body {
 
     .primary-color{
         color: $primary-color
+    }
+
+    .stays-number{
+        font-size: 14px;
+        font-weight: normal;
+        margin-top: 15px;
+        color: $primary-text-color;
+    }
+
+    .hotel-list{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        &::after{
+            content: "";
+            flex: auto;
+        }
     }
 }

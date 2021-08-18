@@ -5,11 +5,13 @@ function CardComponent({hotel}) {
 
     return(
         <div className="card">
-            <img src={hotel.photo} alt="" />
+            <div className="photo" style={{backgroundImage: `url(${hotel.photo})`}}></div>
             <div className="footer">
                 {hotel.superHost && <span className="super-host">SUPER HOST</span>}
                 <span className="type">{hotel.type}, {hotel.beds} beds</span>
-                <span class="material-icons">star</span> {hotel.rating}
+                <div className="rating">
+                    <span class="material-icons">star</span> {hotel.rating}
+                </div>
             </div>
             <p className="title">{hotel.title}</p>
         </div>

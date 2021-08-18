@@ -25,7 +25,7 @@ function App() {
     setFilteredHotels(data);
     setViewInfo({
       text: 'All stays',
-      number: data.length
+      num: data.length
     })
   }, []);
 
@@ -61,15 +61,16 @@ function App() {
       <HeaderComponent></HeaderComponent>
 
       <div className="content">
-        <h1>{viewInfo.text}</h1>
-        <span className="pull-right">{viewInfo.num}</span>
+        <h1>{viewInfo.text} <span className="stays-number pull-right">{viewInfo.num} stays</span></h1>
 
-        {hotelFiltered.map((hotel) => (
-          <CardComponent 
+        <div className="hotel-list">
+          {hotelFiltered.map((hotel) => (
+            <CardComponent 
             key={hotel.title}
             hotel={hotel}>
-          </CardComponent>
-        ))}
+            </CardComponent>
+          ))}
+        </div>
       </div>
     </Fragment>
   );
